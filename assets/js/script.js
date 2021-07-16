@@ -62,6 +62,32 @@ $(".list-group").on("blur", "textarea", function () {
   $(this).replaceWith(taskP);
 });
 
+$(".list-group").on("click", "span", function () {
+  // get current text
+  var date = $(this).text().trim();
+  var dateInput = $("<input>")
+    .attr("type", "text")
+    .addClass("form-control")
+    .val(date);
+  $(this).replaceWith(dateInput);
+  dateInput.trigger("focus");
+});
+
+$(".list-gropup").on("blur", "input[type='text']", function () {
+  var date = $(this).val().trim();
+  var status = $(this).closest(".list-group").attr("id").replace("list-", "");
+  var index = $(this).cloest(".list-group-item").index();
+
+  tasks[status][index].date = date;
+  saveTasks();
+
+  var taskSpan = $("<span>")
+    .addClass("badge badge-primary badge-pill")
+    .text(date);
+
+  $(this).replaceWith(taskSpan);
+});
+
 // modal was triggered
 $("#task-form-modal").on("show.bs.modal", function () {
   // clear values
