@@ -74,15 +74,19 @@ $(".card .list-group").sortable({
   tolerance: "pointer",
   helper: "clone",
   activate: function (event, ui) {
+    $(bottom - trash).addClass("bottom-trash-drag");
     console.log(ui);
   },
   deactivate: function (event, ui) {
+    $(bottom - trash).removeClass("bottom-trash-drag");
     console.log(ui);
   },
   over: function (event) {
+    $(event.target).addClass("dropover-active");
     console.log(event);
   },
   out: function (event) {
+    $(event.target).removeClass("dropover-active");
     console.log(event);
   },
   update: function () {
@@ -118,11 +122,14 @@ $("#trash").droppable({
   drop: function (event, ui) {
     // remove dragged element from the dom
     ui.draggable.remove();
+    $(bottom - trash).removeClass("bottom-trash-active");
   },
   over: function (event, ui) {
+    $(bottom - trash).addClass("bottom-trash-active");
     console.log(ui);
   },
   out: function (event, ui) {
+    $(bottom - trash).removeClass("bottom-trash-active");
     console.log(ui);
   },
 });
